@@ -9,6 +9,7 @@ namespace DataStorageAndProcessing.Data
 {
     public class Institution
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public int LocationID { get; set; }

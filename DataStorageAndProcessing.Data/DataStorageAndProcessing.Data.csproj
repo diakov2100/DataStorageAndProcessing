@@ -67,10 +67,13 @@
     <Compile Include="Migrations\201611161547169_InitialCreate.Designer.cs">
       <DependentUpon>201611161547169_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611161747397_Initial.cs" />
+    <Compile Include="Migrations\201611161747397_Initial.Designer.cs">
+      <DependentUpon>201611161747397_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Raiting.cs" />
-    <Compile Include="RaitingDBInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -81,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611161547169_InitialCreate.resx">
       <DependentUpon>201611161547169_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161747397_Initial.resx">
+      <DependentUpon>201611161747397_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

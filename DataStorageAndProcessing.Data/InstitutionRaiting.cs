@@ -9,6 +9,7 @@ namespace DataStorageAndProcessing.Data
 {
     public class InstitutionRaiting
     {
+        [Key]
         public int Id { get; set; }
         public int WordRank { get; set; }
         public int NationalRank { get; set; }

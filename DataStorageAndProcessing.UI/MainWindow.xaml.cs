@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DataStorageAndProcessing.Data.Migrations;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations.Infrastructure;
+using System.Diagnostics;
 
 namespace DataStorageAndProcessing.UI
 {
@@ -30,7 +34,21 @@ namespace DataStorageAndProcessing.UI
         {
             using (var contex= new Context())
             {
-                contex.Locations.ToList();
+
+
+                contex.Database.Initialize(true);
+                contex.SaveChanges();
+                Configuration configuration = new Configuration();
+                configuration.ContextType = typeof(Context);
+                var migrator = new DbMigrator(configuration);
+
+                //This will get the SQL script which will update the DB and write it to debug
+                var scriptor = new MigratorScriptingDecorator(migrator);
+                string script = scriptor.ScriptUpdate(sourceMigration: null, targetMigration: null).ToString();
+                Debug.Write(script);
+
+                //This will run the migration update script and will run Seed() method
+                migrator.Update();
             }
         }
     }
