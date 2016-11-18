@@ -63,13 +63,9 @@
     <Compile Include="InstitutionRaiting.cs" />
     <Compile Include="Institution.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Migrations\201611161547169_InitialCreate.cs" />
-    <Compile Include="Migrations\201611161547169_InitialCreate.Designer.cs">
-      <DependentUpon>201611161547169_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611161747397_Initial.cs" />
-    <Compile Include="Migrations\201611161747397_Initial.Designer.cs">
-      <DependentUpon>201611161747397_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201611180723489_Initial.cs" />
+    <Compile Include="Migrations\201611180723489_Initial.Designer.cs">
+      <DependentUpon>201611180723489_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,11 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611161547169_InitialCreate.resx">
-      <DependentUpon>201611161547169_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161747397_Initial.resx">
-      <DependentUpon>201611161747397_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611180723489_Initial.resx">
+      <DependentUpon>201611180723489_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

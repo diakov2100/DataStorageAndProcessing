@@ -1,4 +1,5 @@
-﻿using DataStorageAndProcessing.Data;
+﻿
+using DataStorageAndProcessing.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DataStorageAndProcessing.Data.Migrations;
+//using DataStorageAndProcessing.Data.Migrations;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Diagnostics;
+using DataStorageAndProcessing.Data.Migrations;
 
 namespace DataStorageAndProcessing.UI
 {
@@ -35,9 +37,9 @@ namespace DataStorageAndProcessing.UI
             using (var contex= new Context())
             {
 
-
-                contex.Database.Initialize(true);
-                contex.SaveChanges();
+                //contex.Institutions.ToList();
+                //contex.Database.Initialize(true);
+                //contex.SaveChanges();
                 Configuration configuration = new Configuration();
                 configuration.ContextType = typeof(Context);
                 var migrator = new DbMigrator(configuration);
@@ -47,8 +49,17 @@ namespace DataStorageAndProcessing.UI
                 string script = scriptor.ScriptUpdate(sourceMigration: null, targetMigration: null).ToString();
                 Debug.Write(script);
 
-                //This will run the migration update script and will run Seed() method
-                migrator.Update();
+                ////This will run the migration update script and will run Seed() method
+                migrator.Update();               
+
+            }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                context.Database.Delete();
             }
         }
     }

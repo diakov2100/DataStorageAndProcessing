@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,18 @@ namespace DataStorageAndProcessing.Data
             modelBuilder.Entity<Institution>()
               .HasRequired(a => a.Location);
             base.OnModelCreating(modelBuilder);
+        }
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                string errorMessages = string.Join("; ", ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage));
+                throw new DbEntityValidationException(errorMessages);
+            }
         }
     }
 }
