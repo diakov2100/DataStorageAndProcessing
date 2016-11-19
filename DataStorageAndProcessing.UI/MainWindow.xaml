@@ -5,10 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataStorageAndProcessing.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Univercity Raiting Database" Height="768" Width="1366">
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="40" Margin="22,64,0,0" VerticalAlignment="Top" Width="194" Click="button_Click"/>
-        <Button x:Name="button1" Content="Delete" HorizontalAlignment="Left" Height="38" Margin="162,203,0,0" VerticalAlignment="Top" Width="145" Click="button1_Click"/>
-
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="67" Click="button_Click"/>
+        <Button x:Name="button1" Content="Delete" HorizontalAlignment="Left" Height="21" Margin="10,55,0,0" VerticalAlignment="Top" Width="67" Click="button1_Click"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="717" Margin="250,10,0,0" VerticalAlignment="Top" Width="1098"/>
+        <Button x:Name="button2" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click">
+            <DataGrid x:Name="dataGrid1"/>
+        </Button>
+        <ComboBox x:Name="selectyearBox" HorizontalAlignment="Left" Height="21" Margin="108,87,0,0" VerticalAlignment="Top" Width="110">
+            <TextBlock>2012</TextBlock>
+            <TextBlock>2013</TextBlock>
+            <TextBlock>2014</TextBlock>
+            <TextBlock>2015</TextBlock>
+            <TextBlock>2016</TextBlock>
+        </ComboBox>
     </Grid>
 </Window>
