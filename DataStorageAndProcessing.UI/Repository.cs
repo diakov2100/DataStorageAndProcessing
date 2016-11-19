@@ -11,7 +11,7 @@ namespace DataStorageAndProcessing.UI
         public class YearRait
         {
             public int WordRank { get; set; }
-            public string Institution{ get; set; }
+            public string Institution { get; set; }
             public string Location { get; set; }
             public int NationalRank { get; set; }
             public int QualityofEducation { get; set; }
@@ -23,6 +23,25 @@ namespace DataStorageAndProcessing.UI
             public int BroadImpact { get; set; }
             public int Patents { get; set; }
             public double Score { get; set; }
+        }
+        public class YearRaitGroup
+        {
+            public string Location { get; set; }
+            public IEnumerable<YearRait> Institutions { get; set; }
+        }
+        public class UniversityDynamic
+        {
+            public string Institution { get; set; }
+            public int Year { get; set; }
+            public int WorldRank { get; set; }
+            public double Score { get; set; }
+        }
+        public class UniversityScore
+        {
+            public string Institution { get; set; }
+            public double MinScore { get; set; }
+            public double MaxScore { get; set; }
+            public double AverScore { get; set; }
         }
     }
 }

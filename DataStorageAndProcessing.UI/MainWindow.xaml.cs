@@ -1,5 +1,4 @@
-﻿
-using DataStorageAndProcessing.Data;
+﻿using DataStorageAndProcessing.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using DataStorageAndProcessing.Data.Migrations;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Diagnostics;
@@ -31,6 +29,11 @@ namespace DataStorageAndProcessing.UI
         {
             InitializeComponent();
             selectyearBox.SelectedIndex = 0;
+            using (var context = new Context())
+            {
+                UnivList.ItemsSource = context.Institutions.Select(x => x.Name).ToList();
+            }
+            UnivList.SelectedIndex = 0;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -66,40 +69,117 @@ namespace DataStorageAndProcessing.UI
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            int[] scores = new int[] { 97, 92, 81, 60 };
-
             using (var context = new Context())
             {
-                int tecyear = 2012 + selectyearBox.SelectedIndex;
-                var seq = from t1 in context.Raitings
-                          where t1.Year == tecyear 
-                          select t1;
-                IEnumerable<Repository.YearRait> sequence = from t1 in seq
-                                                     join t2 in context.InstiutionRaitings on t1.Id equals t2.RaitingID
-                                                     join t3 in context.Institutions on t2.InstitutionID equals t3.Id
-                                                     join t4 in context.Locations on t3.LocationID equals t4.Id
-                                                     select new Repository.YearRait
-                                                     {
-                                                         WordRank = t2.WordRank,
-                                                         Institution = t3.Name,
-                                                         Location = t4.CountryName,
-                                                         NationalRank = t2.NationalRank,
-                                                         QualityofEducation = t2.QualityofEducation,
-                                                         AlumniEmployment = t2.AlumniEmployment,
-                                                         QualityofFaculty = t2.QualityofFaculty,
-                                                         Publications = t2.Publications,
-                                                         Influence = t2.Influence,
-                                                         Citations = t2.Citations,
-                                                         BroadImpact = t2.BroadImpact,
-                                                         Patents = t2.Patents,
-                                                         Score = t2.Score
-                                                     };
-                //dataGrid.ItemsSource = sequence;
-                foreach (Repository.YearRait tec in sequence)
-                {
-                    dataGrid.Items.Add(tec);
-                }
+                IEnumerable<Repository.YearRait> sequence = from t1 in context.Raitings
+                                                            where t1.Year == 2012 + selectyearBox.SelectedIndex
+                                                            join t2 in context.InstiutionRaitings on t1.Id equals t2.RaitingID
+                                                            join t3 in context.Institutions on t2.InstitutionID equals t3.Id
+                                                            join t4 in context.Locations on t3.LocationID equals t4.Id
+                                                            orderby t2.WordRank
+                                                            select new Repository.YearRait
+                                                            {
+                                                                WordRank = t2.WordRank,
+                                                                Institution = t3.Name,
+                                                                Location = t4.CountryName,
+                                                                NationalRank = t2.NationalRank,
+                                                                QualityofEducation = t2.QualityofEducation,
+                                                                AlumniEmployment = t2.AlumniEmployment,
+                                                                QualityofFaculty = t2.QualityofFaculty,
+                                                                Publications = t2.Publications,
+                                                                Influence = t2.Influence,
+                                                                Citations = t2.Citations,
+                                                                BroadImpact = t2.BroadImpact,
+                                                                Patents = t2.Patents,
+                                                                Score = t2.Score
+                                                            };
+                Data.ItemsSource = sequence.ToList();
             }
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                var sequence1 = from t1 in context.Raitings
+                                where t1.Year == 2012 + selectyearBox.SelectedIndex
+                                join t2 in context.InstiutionRaitings on t1.Id equals t2.RaitingID
+                                join t3 in context.Institutions on t2.InstitutionID equals t3.Id
+                                join t4 in context.Locations on t3.LocationID equals t4.Id
+                                orderby t2.WordRank
+                                select new Repository.YearRait
+                                {
+                                    WordRank = t2.WordRank,
+                                    Institution = t3.Name,
+                                    Location = t4.CountryName,
+                                    NationalRank = t2.NationalRank,
+                                    QualityofEducation = t2.QualityofEducation,
+                                    AlumniEmployment = t2.AlumniEmployment,
+                                    QualityofFaculty = t2.QualityofFaculty,
+                                    Publications = t2.Publications,
+                                    Influence = t2.Influence,
+                                    Citations = t2.Citations,
+                                    BroadImpact = t2.BroadImpact,
+                                    Patents = t2.Patents,
+                                    Score = t2.Score
+                                };
+                IEnumerable<Repository.YearRaitGroup> sequence2 = from t1 in sequence1
+                                                                  group t1 by t1.Location into g
+                                                                  select new Repository.YearRaitGroup
+                                                                  {
+                                                                      Location = g.Key,
+                                                                      Institutions = g.OrderByDescending(x => x.Score)
+                                                                  };
+
+
+                foreach (var tec in sequence2)
+                {
+                    if (Data.ItemsSource != null)
+                        Data.ItemsSource = tec.Institutions.Union(Data.ItemsSource as IEnumerable<Repository.YearRait>);
+                    else Data.ItemsSource = tec.Institutions;
+                }
+            };
+        }
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                IEnumerable<Repository.UniversityDynamic> sequence = from t1 in context.Institutions
+                                                                     where t1.Name == UnivList.SelectedItem.ToString()
+                                                                     join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
+                                                                     join t3 in context.Raitings on t2.RaitingID equals t3.Id
+                                                                     select new Repository.UniversityDynamic
+                                                                     {
+                                                                         Institution = t1.Name,
+                                                                         Year = t3.Year,
+                                                                         WorldRank = t2.WordRank,
+                                                                         Score = t2.Score
+                                                                     };
+                Data.ItemsSource = sequence.ToList();
+            }
+        }
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                IEnumerable<Repository.UniversityScore> sequence = from t1 in context.Institutions
+                                                                   join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
+                                                                   join t3 in context.Raitings on t2.RaitingID equals t3.Id
+                                                                   group t2 by t2.Institution into g
+                                                                   orderby g.Average(x => x.Score) descending
+                                                                   select new Repository.UniversityScore
+                                                                   {
+                                                                       Institution = g.Key.Name,
+                                                                       MinScore = g.Min(x => x.Score),
+                                                                       MaxScore = g.Max(x => x.Score),
+                                                                       AverScore = Math.Round(g.Average(x => x.Score), 2)
+                                                                   };
+
+                Data.ItemsSource = sequence.ToList();
+            }
+        }
+
+
     }
 }
+
