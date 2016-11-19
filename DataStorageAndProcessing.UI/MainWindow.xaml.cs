@@ -30,19 +30,8 @@ namespace DataStorageAndProcessing.UI
             {
 
                 //contex.Institutions.ToList();
-                //contex.Database.Initialize(true);
-                //contex.SaveChanges();
-                Configuration configuration = new Configuration();
-                configuration.ContextType = typeof(Context);
-                var migrator = new DbMigrator(configuration);
-
-                //This will get the SQL script which will update the DB and write it to debug
-                var scriptor = new MigratorScriptingDecorator(migrator);
-                string script = scriptor.ScriptUpdate(sourceMigration: null, targetMigration: null).ToString();
-                Debug.Write(script);
-
-                ////This will run the migration update script and will run Seed() method
-                migrator.Update();
+                contex.Database.Initialize(true);
+                contex.SaveChanges();
             }
         }
 
@@ -85,11 +74,13 @@ namespace DataStorageAndProcessing.UI
                 {
                     IEnumerable<Repository.YearRaitGroup> sequence2 = from t1 in sequence
                                                                       group t1 by t1.Location into g
+                                                                      
                                                                       select new Repository.YearRaitGroup
                                                                       {
                                                                           Location = g.Key,
                                                                           Institutions = g.OrderByDescending(x => x.Score)
                                                                       };
+                    sequence2.OrderBy(x => x.Location);
                     DataGridUniv.ItemsSource = null;
                     foreach (var tec in sequence2)
                     {

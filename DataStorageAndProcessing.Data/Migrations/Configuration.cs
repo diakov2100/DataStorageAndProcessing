@@ -11,7 +11,7 @@ namespace DataStorageAndProcessing.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(DataStorageAndProcessing.Data.Context context)
@@ -72,7 +72,8 @@ namespace DataStorageAndProcessing.Data.Migrations
                         context.SaveChanges();
                     }
 
-                    int TecBroadImpact, TecPatents;
+                    int? TecBroadImpact; 
+                    int TecPatents;
                     double TecScore;
 
                     if (list.Count == 13)
@@ -83,7 +84,7 @@ namespace DataStorageAndProcessing.Data.Migrations
                     }
                     else
                     {
-                        TecBroadImpact = 0;
+                        TecBroadImpact = null;
                         TecPatents = STRparse(list[10]);
                         TecScore = double.Parse(list[11].Replace('.', ','));
                     }

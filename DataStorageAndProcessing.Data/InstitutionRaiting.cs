@@ -18,8 +18,8 @@ namespace DataStorageAndProcessing.Data
         public int QualityofFaculty { get; set; }
         public int Publications { get; set; }
         public int Influence { get; set; }
-        public int Citations { get; set; }
-        public int BroadImpact { get; set; }
+        public int Citations { get; set; }       
+        public int? BroadImpact { get; set; }
         public int Patents { get; set; }
         public double Score { get; set; }
         [Required]
