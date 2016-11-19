@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace DataStorageAndProcessing.UI
             public int BroadImpact { get; set; }
             public int Patents { get; set; }
             public double Score { get; set; }
+
         }
         public class YearRaitGroup
         {
@@ -44,4 +46,5 @@ namespace DataStorageAndProcessing.UI
             public double AverScore { get; set; }
         }
     }
+        
 }

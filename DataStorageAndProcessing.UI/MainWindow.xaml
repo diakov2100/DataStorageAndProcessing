@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataStorageAndProcessing.UI"
         mc:Ignorable="d"
-        Title="Univercity Raiting Database" Height="519" Width="1099">
+        Title="University Raiting Database" Height="519" Width="1099">
     <Grid>
-
-        <DataGrid x:Name="Data" HorizontalAlignment="Left" Height="466" Margin="584,10,0,0" VerticalAlignment="Top" Width="497" IsReadOnly="True" RowHeaderWidth="0" />
+        <DataGrid x:Name="DataGridUniv" Margin="245,10,10,10" IsReadOnly="True" RowHeaderWidth="0" />
 
         <GroupBox x:Name="DBControlgroupBox" Header="Database Control" HorizontalAlignment="Left" Height="70" Margin="10,10,0,0" VerticalAlignment="Top" Width="230">
             <DockPanel LastChildFill="False" Margin="0,0,0,0">
@@ -29,22 +28,20 @@
                 <CheckBox x:Name="GroupByLocCheckBox" Content="Group by location" HorizontalAlignment="Left" Height="25" Margin="10,42,0,0" VerticalAlignment="Top" Width="100" FontSize="10"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="UniversityStat" Header="University Statistic" HorizontalAlignment="Left" Height="132" Margin="10,187,0,0" VerticalAlignment="Top" Width="230">
+        <GroupBox x:Name="UniversityStat" Header="University Statistic" HorizontalAlignment="Left" Height="110" Margin="10,180,0,0" VerticalAlignment="Top" Width="230">
             <Grid>
-                <Button x:Name="ShowStat" Content="Show Statistic"  Height="25" Margin="10,10,0,0" Width="146" Click="button4_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="25" Margin="10,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
-                <Label x:Name="label" Content="Selected university" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="button" HorizontalAlignment="Left" Height="25" Margin="131,55,0,0" VerticalAlignment="Top" Width="25">
-                <Image Source="Icons/icon-arrow-down.png">
+                <Button x:Name="ShowStat" Content="Show Statistic"  Height="25" Margin="10,10,0,0" Width="146" Click="ShowStat_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="University" HorizontalAlignment="Left" Height="25" Margin="10,55,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="Choose university" MouseDoubleClick="SelectUniversity_Click"/>
+                <Label x:Name="label" Content="Selected university" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="146"/>
+                <Button x:Name="SelectUniversity" HorizontalAlignment="Left" Height="25" Margin="131,55,0,0" VerticalAlignment="Top" Width="25" Click="SelectUniversity_Click">
+                    <Image Source="Icons/icon-arrow-down.png">
                     </Image>
                 </Button>
-
-
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="UniversityScore" Header="Universities Scores Info" HorizontalAlignment="Left" Height="65" Margin="10,336,0,0" VerticalAlignment="Top" Width="230">
+        <GroupBox x:Name="UniversityScore" Header="Universities Scores Info" HorizontalAlignment="Left" Height="65" Margin="10,295,0,0" VerticalAlignment="Top" Width="230">
             <Grid>
-                <Button x:Name="UnivScore" Content="Show Scores" HorizontalAlignment="Left" Margin="10,10,0,0" Width="100" Click="button5_Click" Height="25" VerticalAlignment="Top"/>
+                <Button x:Name="UnivScore" Content="Show Scores" HorizontalAlignment="Left" Margin="10,10,0,0" Width="100" Click="UnivScore_Click" Height="25" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
     </Grid>

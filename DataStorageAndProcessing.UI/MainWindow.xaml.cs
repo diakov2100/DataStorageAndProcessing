@@ -5,18 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Diagnostics;
 using DataStorageAndProcessing.Data.Migrations;
+using System.Data;
 
 namespace DataStorageAndProcessing.UI
 {
@@ -29,47 +22,8 @@ namespace DataStorageAndProcessing.UI
         {
             InitializeComponent();
             selectyearBox.SelectedIndex = 0;
-            
+
         }
-        //private void button4_Click(object sender, RoutedEventArgs e)
-        //{
-        //    using (var context = new Context())
-        //    {
-        //        IEnumerable<Repository.UniversityDynamic> sequence = from t1 in context.Institutions
-        //                                                             where t1.Name == UnivList.SelectedItem.ToString()
-        //                                                             join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
-        //                                                             join t3 in context.Raitings on t2.RaitingID equals t3.Id
-        //                                                             select new Repository.UniversityDynamic
-        //                                                             {
-        //                                                                 Institution = t1.Name,
-        //                                                                 Year = t3.Year,
-        //                                                                 WorldRank = t2.WordRank,
-        //                                                                 Score = t2.Score
-        //                                                             };
-        //        Data.ItemsSource = sequence.ToList();
-        //    }
-        //}
-        //private void button5_Click(object sender, RoutedEventArgs e)
-        //{
-        //    using (var context = new Context())
-        //    {
-        //        IEnumerable<Repository.UniversityScore> sequence = from t1 in context.Institutions
-        //                                                           join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
-        //                                                           join t3 in context.Raitings on t2.RaitingID equals t3.Id
-        //                                                           group t2 by t2.Institution into g
-        //                                                           orderby g.Average(x => x.Score) descending
-        //                                                           select new Repository.UniversityScore
-        //                                                           {
-        //                                                               Institution = g.Key.Name,
-        //                                                               MinScore = g.Min(x => x.Score),
-        //                                                               MaxScore = g.Max(x => x.Score),
-        //                                                               AverScore = Math.Round(g.Average(x => x.Score), 2)
-        //                                                           };
-
-        //        Data.ItemsSource = sequence.ToList();
-        //    }
-        //}
-
         private void Initialize_Click(object sender, RoutedEventArgs e)
         {
             using (var contex = new Context())
@@ -136,20 +90,72 @@ namespace DataStorageAndProcessing.UI
                                                                           Location = g.Key,
                                                                           Institutions = g.OrderByDescending(x => x.Score)
                                                                       };
+                    DataGridUniv.ItemsSource = null;
                     foreach (var tec in sequence2)
                     {
-                        if (Data.ItemsSource != null)
-                            Data.ItemsSource = tec.Institutions.Union(Data.ItemsSource as IEnumerable<Repository.YearRait>);
-                        else Data.ItemsSource = tec.Institutions;
+                        if (DataGridUniv.ItemsSource != null)
+                            DataGridUniv.ItemsSource = tec.Institutions.Union(DataGridUniv.ItemsSource as IEnumerable<Repository.YearRait>);
+                        else DataGridUniv.ItemsSource = tec.Institutions;
                     }
                 }
                 else
                 {
-                    Data.ItemsSource = sequence.ToList();
+                    DataGridUniv.ItemsSource = sequence.ToList();
                 }
             }
         }
 
+        private void SelectUniversity_Click(object sender, RoutedEventArgs e)
+        {
+            SelectUniversity dialog = new UI.SelectUniversity();
+            dialog.ShowDialog();
+            if (dialog.DialogResult == true)
+                University.Text = dialog.UnivList.SelectedItem.ToString();
+        }
+
+        private void ShowStat_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                IEnumerable<Repository.UniversityDynamic> sequence = from t1 in context.Institutions
+                                                                     where t1.Name == University.Text
+                                                                     join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
+                                                                     join t3 in context.Raitings on t2.RaitingID equals t3.Id
+                                                                     select new Repository.UniversityDynamic
+                                                                     {
+                                                                         Institution = t1.Name,
+                                                                         Year = t3.Year,
+                                                                         WorldRank = t2.WordRank,
+                                                                         Score = t2.Score
+                                                                     };
+                DataGridUniv.ItemsSource = sequence.ToList();
+            }
+        }
+
+        private void UnivScore_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new Context())
+            {
+                IEnumerable<Repository.UniversityScore> sequence = from t1 in context.Institutions
+                                                                   join t2 in context.InstiutionRaitings on t1.Id equals t2.InstitutionID
+                                                                   join t3 in context.Raitings on t2.RaitingID equals t3.Id
+                                                                   group t2 by t2.Institution into g
+                                                                   orderby g.Average(x => x.Score) descending
+                                                                   select new Repository.UniversityScore
+                                                                   {
+                                                                       Institution = g.Key.Name,
+                                                                       MinScore = g.Min(x => x.Score),
+                                                                       MaxScore = g.Max(x => x.Score),
+                                                                       AverScore = Math.Round(g.Average(x => x.Score), 2)
+                                                                   };
+
+                DataGridUniv.ItemsSource = sequence.ToList();
+            }
+        }
+
+
+
     }
 }
+
 

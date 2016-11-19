@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataStorageAndProcessing.UI"
         mc:Ignorable="d"
-        Title="SelectUniversity" Height="264.238" Width="257.616">
+        Title="SelectUniversity" Height="300.728" Width="300" WindowStyle="None">
     <Grid>
-        <ListBox x:Name="UnivList" HorizontalAlignment="Left" Height="156" Margin="347,267,0,0" VerticalAlignment="Top" Width="222"/>
+        <ListBox x:Name="UnivList" SelectionChanged="UnivList_SelectionChanged"/>
     </Grid>
 </Window>

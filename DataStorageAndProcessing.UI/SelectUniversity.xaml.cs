@@ -27,8 +27,11 @@ namespace DataStorageAndProcessing.UI
             {
                 UnivList.ItemsSource = context.Institutions.Select(x => x.Name).ToList();
             }
-            UnivList.SelectedIndex = 0;
         }
-        
+
+        private void UnivList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }
