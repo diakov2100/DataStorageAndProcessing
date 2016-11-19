@@ -1,0 +1,12 @@
+﻿<Window x:Class="DataStorageAndProcessing.UI.SelectUniversity"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataStorageAndProcessing.UI"
+        mc:Ignorable="d"
+        Title="SelectUniversity" Height="264.238" Width="257.616">
+    <Grid>
+        <ListBox x:Name="UnivList" HorizontalAlignment="Left" Height="156" Margin="347,267,0,0" VerticalAlignment="Top" Width="222"/>
+    </Grid>
+</Window>

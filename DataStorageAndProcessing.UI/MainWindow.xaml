@@ -7,21 +7,45 @@
         mc:Ignorable="d"
         Title="Univercity Raiting Database" Height="519" Width="1099">
     <Grid>
-        <Button x:Name="Initialize" Content="Initialize Table" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="90" Click="button_Click"/>
-        <Button x:Name="Delete" Content="Delete Table" HorizontalAlignment="Left" Height="40" Margin="130,10,0,0" VerticalAlignment="Top" Width="67" Click="button1_Click"/>
-        <DataGrid x:Name="Data" HorizontalAlignment="Left" Height="466" Margin="253,10,0,0" VerticalAlignment="Top" Width="828" IsReadOnly="True" RowHeaderWidth="0"
-                  />
-        <Button x:Name="UnivYearRank" Content="University ranking (grouped by country)"  HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="222" Click="button2_Click" Height="21"/>
-        <ComboBox x:Name="selectyearBox" HorizontalAlignment="Left" Height="21" Margin="77,141,0,0" VerticalAlignment="Top" Width="110">
-            <TextBlock>2012</TextBlock>
-            <TextBlock>2013</TextBlock>
-            <TextBlock>2014</TextBlock>
-            <TextBlock>2015</TextBlock>
-            <TextBlock>2016</TextBlock>
-        </ComboBox>
-        <Button x:Name="FullRank" Content="University ranking" HorizontalAlignment="Left" Height="22" Margin="10,87,0,0" VerticalAlignment="Top" Width="222" Click="button3_Click"/>
-        <Button x:Name="Dynamic" Content="University Dynamic" HorizontalAlignment="Left" Height="22" Margin="10,193,0,0" VerticalAlignment="Top" Width="222" Click="button4_Click"/>
-        <ListBox x:Name="UnivList" HorizontalAlignment="Left" Height="156" Margin="10,220,0,0" VerticalAlignment="Top" Width="222"/>
-        <Button x:Name="UnivScore" Content="Universities Scores" HorizontalAlignment="Left" Height="30" Margin="10,407,0,0" VerticalAlignment="Top" Width="222" Click="button5_Click"/>
+
+        <DataGrid x:Name="Data" HorizontalAlignment="Left" Height="466" Margin="584,10,0,0" VerticalAlignment="Top" Width="497" IsReadOnly="True" RowHeaderWidth="0" />
+
+        <GroupBox x:Name="DBControlgroupBox" Header="Database Control" HorizontalAlignment="Left" Height="70" Margin="10,10,0,0" VerticalAlignment="Top" Width="230">
+            <DockPanel LastChildFill="False" Margin="0,0,0,0">
+                <Button x:Name="Initialize" Content="Initialize" Height="30" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" HorizontalAlignment="Left" Click="Initialize_Click"/>
+                <Button x:Name="Delete" Content="Delete" Click="Delete_Click" Height="30" VerticalAlignment="Top" Width="75" Margin="45,10,10,0" HorizontalAlignment="Right" />
+            </DockPanel>
+        </GroupBox>
+        <GroupBox x:Name="RankinggroupBox" Header="University Ranking" HorizontalAlignment="Left" Height="85" Margin="10,85,0,0" VerticalAlignment="Top" Width="230">
+            <Grid>
+                <Button x:Name="FullRank" Content="Show Ranking" Margin="10,10,0,0" Click="FullRank_Click" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <ComboBox x:Name="selectyearBox" HorizontalAlignment="Right" Margin="0,10,10,0" Width="80" Height="25" VerticalAlignment="Top">
+                    <TextBlock><Run Text="2012"/></TextBlock>
+                    <TextBlock><Run Text="2013"/></TextBlock>
+                    <TextBlock><Run Text="2014"/></TextBlock>
+                    <TextBlock><Run Text="2015"/></TextBlock>
+                    <TextBlock><Run Text="2016"/></TextBlock>
+                </ComboBox>
+                <CheckBox x:Name="GroupByLocCheckBox" Content="Group by location" HorizontalAlignment="Left" Height="25" Margin="10,42,0,0" VerticalAlignment="Top" Width="100" FontSize="10"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="UniversityStat" Header="University Statistic" HorizontalAlignment="Left" Height="132" Margin="10,187,0,0" VerticalAlignment="Top" Width="230">
+            <Grid>
+                <Button x:Name="ShowStat" Content="Show Statistic"  Height="25" Margin="10,10,0,0" Width="146" Click="button4_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="25" Margin="10,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+                <Label x:Name="label" Content="Selected university" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="button" HorizontalAlignment="Left" Height="25" Margin="131,55,0,0" VerticalAlignment="Top" Width="25">
+                <Image Source="Icons/icon-arrow-down.png">
+                    </Image>
+                </Button>
+
+
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="UniversityScore" Header="Universities Scores Info" HorizontalAlignment="Left" Height="65" Margin="10,336,0,0" VerticalAlignment="Top" Width="230">
+            <Grid>
+                <Button x:Name="UnivScore" Content="Show Scores" HorizontalAlignment="Left" Margin="10,10,0,0" Width="100" Click="button5_Click" Height="25" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
