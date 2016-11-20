@@ -15,6 +15,7 @@ namespace DataStorageAndProcessing.Data
         public DbSet<Location> Locations { get; set; }
         public DbSet<Institution> Institutions { get; set; }
         public DbSet<InstitutionRaiting> InstiutionRaitings { get; set; }
+        public DbSet<NewInstitutionRaiting> NewInstitutionsRaitings { get; set; }
         public DbSet<Raiting> Raitings { get; set; }
         public Context() : base("RaitingDB")
         {
@@ -26,6 +27,10 @@ namespace DataStorageAndProcessing.Data
             modelBuilder.Entity<InstitutionRaiting>()
              .HasRequired(a => a.Institution);
             modelBuilder.Entity<InstitutionRaiting>()
+             .HasRequired(a => a.Raiting);
+            modelBuilder.Entity<NewInstitutionRaiting>()
+             .HasRequired(a => a.Institution);
+            modelBuilder.Entity<NewInstitutionRaiting>()
              .HasRequired(a => a.Raiting);
             modelBuilder.Entity<Institution>()
               .HasRequired(a => a.Location);
@@ -49,9 +54,8 @@ namespace DataStorageAndProcessing.Data
         // В этом методе можно заполнить таблицу по умолчанию
         protected override void Seed(Context context)
         {
-            context.SaveChanges();
             string[] SiteList = { "http://cwur.org/2012.php",
-               "http://cwur.org/2013.php",
+              "http://cwur.org/2013.php",
             "http://cwur.org/2014.php",
             "http://cwur.org/2015.php",
             "http://cwur.org/2016.php"};
@@ -60,7 +64,7 @@ namespace DataStorageAndProcessing.Data
             foreach (string link in SiteList)
             {
                 Raiting TecRaiting = new Raiting() { Id = RaitId, Year = int.Parse(link.Substring(16, 4)) };
-                context.Raitings.AddOrUpdate(x => x.Year, TecRaiting);
+                context.Raitings.Add(TecRaiting);
                 context.SaveChanges();
 
                 WebClient webClient = new WebClient();
@@ -105,50 +109,56 @@ namespace DataStorageAndProcessing.Data
                         context.Institutions.Add(TecInst);
                         context.SaveChanges();
                     }
-
-                    int? TecBroadImpact;
-                    int TecPatents;
-                    double TecScore;
-
-                    if (list.Count == 13)
+                    if (TecRaiting.Year < 2014)
                     {
-                        TecBroadImpact = int.Parse(list[10]);
-                        TecPatents = STRparse(list[11]);
-                        TecScore = double.Parse(list[12].Replace('.', ','));
+                        InstitutionRaiting TecInstRait = new InstitutionRaiting()
+                        {
+                            AlumniEmployment = STRparse(list[5]),
+                            Citations = STRparse(list[9]),
+                            Id = context.InstiutionRaitings.Count(),
+                            Influence = STRparse(list[8]),
+                            Institution = TecInst,
+                            InstitutionID = TecInst.Id,
+                            NationalRank = int.Parse(list[3]),
+                            Patents = STRparse(list[10]),
+                            Publications = STRparse(list[7]),
+                            QualityofEducation = STRparse(list[4]),
+                            QualityofFaculty = STRparse(list[6]),
+                            Raiting = context.Raitings.First(x => x.Id == RaitId),
+                            RaitingID = TecRaiting.Id,
+                            Score = double.Parse(list[11].Replace('.', ',')),
+                            WorldRank = int.Parse(list[0])
+                        };
+                        context.InstiutionRaitings.Add(TecInstRait);
+                        context.SaveChanges();
                     }
                     else
                     {
-                        TecBroadImpact = null;
-                        TecPatents = STRparse(list[10]);
-                        TecScore = double.Parse(list[11].Replace('.', ','));
+                        NewInstitutionRaiting TecInstRait = new NewInstitutionRaiting()
+                        {
+                            AlumniEmployment = STRparse(list[5]),
+                            Citations = STRparse(list[9]),
+                            Id = context.InstiutionRaitings.Count(),
+                            Influence = STRparse(list[8]),
+                            Institution = TecInst,
+                            InstitutionID = TecInst.Id,
+                            NationalRank = int.Parse(list[3]),
+                            Patents = STRparse(list[11]),
+                            Publications = STRparse(list[7]),
+                            QualityofEducation = STRparse(list[4]),
+                            QualityofFaculty = STRparse(list[6]),
+                            Raiting = context.Raitings.First(x => x.Id == RaitId),
+                            RaitingID = TecRaiting.Id,
+                            Score = double.Parse(list[12].Replace('.', ',')),
+                            WorldRank = int.Parse(list[0]),
+                            BroadImpact = int.Parse(list[10])
+                        };
+                        context.NewInstitutionsRaitings.Add(TecInstRait);
+                        context.SaveChanges();
                     }
-
-                    InstitutionRaiting TecInstRait = new InstitutionRaiting()
-                    {
-                        AlumniEmployment = STRparse(list[5]),
-                        BroadImpact = TecBroadImpact,
-                        Citations = STRparse(list[9]),
-                        Id = context.InstiutionRaitings.Count(),
-                        Influence = STRparse(list[8]),
-                        Institution = TecInst,
-                        InstitutionID = TecInst.Id,
-                        NationalRank = int.Parse(list[3]),
-                        Patents = TecPatents,
-                        Publications = STRparse(list[7]),
-                        QualityofEducation = STRparse(list[4]),
-                        QualityofFaculty = STRparse(list[6]),
-                        Raiting = context.Raitings.First(x => x.Id == RaitId),
-                        RaitingID = TecRaiting.Id,
-                        Score = TecScore,
-                        WordRank = int.Parse(list[0])
-
-                    };
-                    context.InstiutionRaitings.Add(TecInstRait);
-                    context.SaveChanges();
                 }
                 RaitId++;
             }
-            base.Seed(context);
         }
         int STRparse(string str)
         {
@@ -159,5 +169,4 @@ namespace DataStorageAndProcessing.Data
             return int.Parse(str);
         }
     }
-
 }

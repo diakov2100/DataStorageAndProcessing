@@ -11,15 +11,14 @@ namespace DataStorageAndProcessing.Data
     {
         [Key]
         public int Id { get; set; }
-        public int WordRank { get; set; }
+        public int WorldRank { get; set; }
         public int NationalRank { get; set; }
         public int QualityofEducation { get; set; }
         public int AlumniEmployment { get; set; }
         public int QualityofFaculty { get; set; }
         public int Publications { get; set; }
         public int Influence { get; set; }
-        public int Citations { get; set; }       
-        public int? BroadImpact { get; set; }
+        public int Citations { get; set; }
         public int Patents { get; set; }
         public double Score { get; set; }
         [Required]
@@ -28,5 +27,9 @@ namespace DataStorageAndProcessing.Data
         [Required]
         public Institution Institution { get; set; }
         public int InstitutionID { get; set; }
+    }
+    public class NewInstitutionRaiting : InstitutionRaiting
+    {
+        public int BroadImpact { get; set; }
     }
 }

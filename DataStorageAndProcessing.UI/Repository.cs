@@ -21,15 +21,23 @@ namespace DataStorageAndProcessing.UI
             public int Publications { get; set; }
             public int Influence { get; set; }
             public int Citations { get; set; }
-            public int? BroadImpact { get; set; }
             public int Patents { get; set; }
             public double Score { get; set; }
-
         }
+        public class NewYearRait : YearRait
+        {
+            public int BroadImpact { get; set; }
+        }
+
         public class YearRaitGroup
         {
             public string Location { get; set; }
             public IEnumerable<YearRait> Institutions { get; set; }
+        }
+        public class NewYearRaitGroup
+        {
+            public string Location { get; set; }
+            public IEnumerable<NewYearRait> Institutions { get; set; }
         }
         public class UniversityDynamic
         {
