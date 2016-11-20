@@ -51,7 +51,6 @@ namespace DataStorageAndProcessing.Data
     }
     public class Initializer : DropCreateDatabaseIfModelChanges<Context>
     {
-        // В этом методе можно заполнить таблицу по умолчанию
         protected override void Seed(Context context)
         {
             string[] SiteList = { "http://cwur.org/2012.php",
