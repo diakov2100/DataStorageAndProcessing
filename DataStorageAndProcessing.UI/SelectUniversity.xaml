@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="SelectUniversity" Height="300.728" Width="300" WindowStyle="None">
     <Grid>
-        <ListBox x:Name="UnivList" SelectionChanged="UnivList_SelectionChanged"/>
+        <ListBox x:Name="UnivList" SelectionChanged="UnivList_SelectionChanged">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
     </Grid>
 </Window>

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="FillDatabase.cs" />
     <Compile Include="InstitutionRaiting.cs" />
     <Compile Include="Institution.cs" />
     <Compile Include="Location.cs" />

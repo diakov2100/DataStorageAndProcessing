@@ -31,9 +31,9 @@
         <GroupBox x:Name="UniversityStat" Header="University Statistic" HorizontalAlignment="Left" Height="110" Margin="10,180,0,0" VerticalAlignment="Top" Width="230">
             <Grid>
                 <Button x:Name="ShowStat" Content="Show Statistic"  Height="25" Margin="10,10,0,0" Width="146" Click="ShowStat_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox x:Name="University" HorizontalAlignment="Left" Height="25" Margin="10,55,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Text="Choose university" MouseDoubleClick="SelectUniversity_Click"/>
+                <TextBox x:Name="University" HorizontalAlignment="Left" Height="25" Margin="10,55,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="173" Text="Choose university" MouseDoubleClick="SelectUniversity_Click"/>
                 <Label x:Name="label" Content="Selected university" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="146"/>
-                <Button x:Name="SelectUniversity" HorizontalAlignment="Left" Height="25" Margin="131,55,0,0" VerticalAlignment="Top" Width="25" Click="SelectUniversity_Click">
+                <Button x:Name="SelectUniversity" HorizontalAlignment="Left" Height="25" Margin="183,55,0,0" VerticalAlignment="Top" Width="25" Click="SelectUniversity_Click">
                     <Image Source="Icons/icon-arrow-down.png">
                     </Image>
                 </Button>
