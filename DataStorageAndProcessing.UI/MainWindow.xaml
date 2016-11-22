@@ -44,5 +44,7 @@
                 <Button x:Name="UnivScore" Content="Show Scores" HorizontalAlignment="Left" Margin="10,10,0,0" Width="100" Click="UnivScore_Click" Height="25" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
+        <ProgressBar x:Name="PRBar" HorizontalAlignment="Left" Margin="25,0,0,10" Width="100" Height="20" VerticalAlignment="Bottom"/>
+        <Label x:Name="Updatetext" HorizontalAlignment="Left" Height="22" Margin="25,0,0,30" VerticalAlignment="Bottom" Width="100" Content="Processing Database" FontSize="9.333" />
     </Grid>
 </Window>

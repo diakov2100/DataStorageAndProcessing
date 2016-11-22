@@ -10,8 +10,14 @@ namespace DataStorageAndProcessing.Data
 {
     public static class FillDatabase
     {
-        public static void Fill( Context context)
+        public static Action<int> Update;
+        public static Action<bool> InProgress;
+        
+        public static void Fill(Context context)
         {
+            int step = 0;
+            int intstep = 0;
+            InProgress(true);
             string[] SiteList = { "http://cwur.org/2012.php",
               "http://cwur.org/2013.php",
             "http://cwur.org/2014.php",
@@ -114,9 +120,17 @@ namespace DataStorageAndProcessing.Data
                         context.NewInstitutionsRaitings.Add(TecInstRait);
                         context.SaveChanges();
                     }
+                    if (intstep- step > 32)
+                    {
+                        Update(intstep);
+                        step = intstep;
+                    }
+                    intstep++;
                 }
                 RaitId++;
             }
+            Update(3200);
+            InProgress(false);
         }
         static int STRparse(string str)
         {

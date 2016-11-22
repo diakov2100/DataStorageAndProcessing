@@ -54,6 +54,7 @@ namespace DataStorageAndProcessing.Data
         protected override void Seed(Context context)
         {
             FillDatabase.Fill(context);
+            base.Seed(context);
         }
     }
 }
