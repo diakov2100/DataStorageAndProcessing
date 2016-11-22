@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataStorageAndProcessing.UI"
         mc:Ignorable="d"
-        Title="University Raiting Database" Height="519" Width="1099">
+        Title="University Raiting Database" Height="720" Width="1280">
     <Grid>
-        <DataGrid x:Name="DataGridUniv" Margin="245,10,10,10" IsReadOnly="True" RowHeaderWidth="0" />
+        <DataGrid x:Name="DataGridUniv" Margin="245,10,10,10" IsReadOnly="True" RowHeaderWidth="0" FontSize="10.667" />
 
         <GroupBox x:Name="DBControlgroupBox" Header="Database Control" HorizontalAlignment="Left" Height="70" Margin="10,10,0,0" VerticalAlignment="Top" Width="230">
             <DockPanel LastChildFill="False" Margin="0,0,0,0">
@@ -45,6 +45,6 @@
             </Grid>
         </GroupBox>
         <ProgressBar x:Name="PRBar" HorizontalAlignment="Left" Margin="25,0,0,10" Width="100" Height="20" VerticalAlignment="Bottom"/>
-        <Label x:Name="Updatetext" HorizontalAlignment="Left" Height="22" Margin="25,0,0,30" VerticalAlignment="Bottom" Width="100" Content="Processing Database" FontSize="9.333" />
+        <Label x:Name="Updatetext" HorizontalAlignment="Left" Height="22" Margin="25,0,0,30" VerticalAlignment="Bottom" Width="100" Content="Processing database..." FontSize="9.333" />
     </Grid>
 </Window>

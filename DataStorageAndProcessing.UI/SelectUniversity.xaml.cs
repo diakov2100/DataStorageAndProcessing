@@ -25,7 +25,7 @@ namespace DataStorageAndProcessing.UI
             InitializeComponent();
             using (var context = new Context())
             {
-                UnivList.ItemsSource = context.Institutions.Select(x => x.Name).ToList();
+                UnivList.ItemsSource = context.Institutions.OrderBy(x=>x.Name).Select(x => x.Name).ToList();
             }
         }
 

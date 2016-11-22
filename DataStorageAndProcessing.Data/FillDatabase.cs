@@ -11,13 +11,12 @@ namespace DataStorageAndProcessing.Data
     public static class FillDatabase
     {
         public static Action<int> Update;
-        public static Action<bool> InProgress;
         
         public static void Fill(Context context)
         {
             int step = 0;
             int intstep = 0;
-            InProgress(true);
+
             string[] SiteList = { "http://cwur.org/2012.php",
               "http://cwur.org/2013.php",
             "http://cwur.org/2014.php",
@@ -36,8 +35,6 @@ namespace DataStorageAndProcessing.Data
                 string page = webClient.DownloadString(link);
                 HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
                 doc.LoadHtml(page);
-
-
                 List<List<string>> table = doc.DocumentNode.SelectSingleNode("//table[@class='table table-bordered table-hover']")
                             .Descendants("tr")
                             .Skip(1)
@@ -130,7 +127,6 @@ namespace DataStorageAndProcessing.Data
                 RaitId++;
             }
             Update(3200);
-            InProgress(false);
         }
         static int STRparse(string str)
         {

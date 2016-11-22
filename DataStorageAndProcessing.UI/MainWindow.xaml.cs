@@ -28,8 +28,17 @@ namespace DataStorageAndProcessing.UI
             PRBar.Maximum = 3200;
             PRBar.Visibility = Visibility.Collapsed;
             Updatetext.Visibility = Visibility.Collapsed;
-            FillDatabase.Update += ProgressUp;
-            FillDatabase.InProgress+=(x => Dispatcher.Invoke(() => ProcessRunning = x));
+            FillDatabase.Update += (prog => Dispatcher.Invoke(() =>
+             {
+                 ProcessRunning = true;
+                 PRBar.Value = (prog);
+                 if (prog == 3200)
+                 {
+                     Dispatcher.Invoke(() => PRBar.Visibility = Visibility.Collapsed);
+                     Dispatcher.Invoke(() => Updatetext.Visibility = Visibility.Collapsed);
+                     ProcessRunning = false;
+                 }
+             }));
         }
         private void Initialize_Click(object sender, RoutedEventArgs e)
         {
@@ -40,17 +49,19 @@ namespace DataStorageAndProcessing.UI
                 Task t = new Task(Repository.InitilizeDB);
                 t.Start();
             }
-            
+
         }
-        private void ProgressUp(int  prog)
+        private void ProgressUp(int prog)
         {
             Dispatcher.Invoke(() =>
             {
+                ProcessRunning = true;
                 PRBar.Value = (prog);
                 if (prog == 3200)
                 {
                     Dispatcher.Invoke(() => PRBar.Visibility = Visibility.Collapsed);
                     Dispatcher.Invoke(() => Updatetext.Visibility = Visibility.Collapsed);
+                    ProcessRunning = false;
                 }
             });
         }
@@ -67,16 +78,16 @@ namespace DataStorageAndProcessing.UI
         private void FullRank_Click(object sender, RoutedEventArgs e)
         {
 
-                var Result = Repository.GetFullRank(2012 + selectyearBox.SelectedIndex, GroupByLocCheckBox.IsChecked.Value);
-                if (Result is List<Repository.YearRait>)
-                {
-                    DataGridUniv.ItemsSource = Result as List<Repository.YearRait>;
-                }
-                else
-                {
-                    DataGridUniv.ItemsSource = Result as List<Repository.NewYearRait>;
-                    DataGridUniv.Columns[0].DisplayIndex = 11;
-                }            
+            var Result = Repository.GetFullRank(2012 + selectyearBox.SelectedIndex, GroupByLocCheckBox.IsChecked.Value);
+            if (Result is List<Repository.YearRait>)
+            {
+                DataGridUniv.ItemsSource = Result as List<Repository.YearRait>;
+            }
+            else
+            {
+                DataGridUniv.ItemsSource = Result as List<Repository.NewYearRait>;
+                DataGridUniv.Columns[0].DisplayIndex = 11;
+            }
         }
         private void SelectUniversity_Click(object sender, RoutedEventArgs e)
         {
@@ -87,14 +98,14 @@ namespace DataStorageAndProcessing.UI
         }
 
         private void ShowStat_Click(object sender, RoutedEventArgs e)
-        { 
-            if (University.Text== "Choose university")
+        {
+            if (University.Text == "Choose university")
             {
                 SelectUniversity dialog = new UI.SelectUniversity();
                 dialog.ShowDialog();
                 if (dialog.DialogResult == true)
                     University.Text = dialog.UnivList.SelectedItem.ToString();
-            }         
+            }
             DataGridUniv.ItemsSource = Repository.GetDynamic(University.Text);
         }
 
