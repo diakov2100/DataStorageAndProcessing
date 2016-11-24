@@ -11,7 +11,7 @@
 
         <GroupBox x:Name="DBControlgroupBox" Header="Database Control" HorizontalAlignment="Left" Height="70" Margin="10,10,0,0" VerticalAlignment="Top" Width="230">
             <DockPanel LastChildFill="False" Margin="0,0,0,0">
-                <Button x:Name="Initialize" Content="Initialize" Height="30" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" HorizontalAlignment="Left" Click="Initialize_Click"/>
+                <Button x:Name="Initialize" Content="Fill Data" Height="30" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" HorizontalAlignment="Left" Click="Initialize_Click"/>
                 <Button x:Name="Delete" Content="Delete" Click="Delete_Click" Height="30" VerticalAlignment="Top" Width="75" Margin="45,10,10,0" HorizontalAlignment="Right" />
             </DockPanel>
         </GroupBox>

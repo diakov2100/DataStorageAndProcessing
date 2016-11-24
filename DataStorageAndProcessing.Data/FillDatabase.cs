@@ -53,7 +53,7 @@ namespace DataStorageAndProcessing.Data
                             CountryName = list[2]
                         };
                         context.Locations.AddOrUpdate(x => x.CountryName, TecLoc);
-                        context.SaveChanges();
+                       // context.SaveChanges();
                     }
 
                     tec = list[1];
@@ -68,7 +68,7 @@ namespace DataStorageAndProcessing.Data
                             LocationID = TecLoc.Id
                         };
                         context.Institutions.Add(TecInst);
-                        context.SaveChanges();
+                       // context.SaveChanges();
                     }
                     if (TecRaiting.Year < 2014)
                     {
@@ -91,7 +91,7 @@ namespace DataStorageAndProcessing.Data
                             WorldRank = int.Parse(list[0])
                         };
                         context.InstiutionRaitings.Add(TecInstRait);
-                        context.SaveChanges();
+                        //context.SaveChanges();
                     }
                     else
                     {
@@ -115,7 +115,7 @@ namespace DataStorageAndProcessing.Data
                             BroadImpact = int.Parse(list[10])
                         };
                         context.NewInstitutionsRaitings.Add(TecInstRait);
-                        context.SaveChanges();
+                     // context.SaveChanges();
                     }
                     if (intstep- step > 32)
                     {
@@ -125,6 +125,7 @@ namespace DataStorageAndProcessing.Data
                     intstep++;
                 }
                 RaitId++;
+                context.SaveChanges();
             }
             Update(3200);
         }
